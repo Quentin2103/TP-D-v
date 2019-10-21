@@ -1,0 +1,15 @@
+<?php
+
+class connectBDD {
+
+    public static function connectDb() {
+        
+        $pdo_options[\PDO::ATTR_ERRMODE] = \PDO::ERRMODE_EXCEPTION;
+        
+        $dbh = new PDO('mysql:host=localhost;dbname=Bug;charset=utf8', 'root', '', $pdo_options);
+        return $dbh;
+    }
+
+}
+?>
+
