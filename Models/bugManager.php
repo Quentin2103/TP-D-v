@@ -1,7 +1,8 @@
 <?php
 
-include_once ('bug.php');
-include_once ('Manager.php');
+include_once ('../Models/bug.php');
+include_once ('../Models/Manager.php');
+require_once ('../Controllers/index.php');
 
 
 class bugmanager extends connectBDD {

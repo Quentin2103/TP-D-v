@@ -1,7 +1,5 @@
 <?php
-include('bugManager.php');
-$bugManager = new bugManager();
-$Bugs = $bugManager->findAll();
+require_once ('../Controllers/index.php');
 ?>
 
 

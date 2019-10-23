@@ -1,9 +1,5 @@
   <?php
-        require("bugManager.php");
-
-        $id = $_GET['Id'];
-        $manager = new bugManager();
-        $bug = $manager->find($id);
+      require_once ('../Controllers/index.php');
         ?>
 
 

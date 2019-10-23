@@ -1,18 +1,5 @@
 <?php
-include 'bugManager.php';
-
-if (isset($_POST['envoie'])) {
-    
-    $bugManager = new bugmanager();
-    
-    $bug = new Bug($_POST["titre"], $_POST["desc"]);
-    // return $Bugs;
-    
-    $bugManager->add($bug);
-    
-    header('Location:list.php');
-    
-}
+include '../Models/bugManager.php'
 ?>
 
 
