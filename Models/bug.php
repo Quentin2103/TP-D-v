@@ -39,9 +39,13 @@ class Bug {
     function setDescription($description) {
         $this->description = $description;
     }
-    function __construct($titre, $description) {
+    function __construct($id,$titre, $description,$date,$closed) {
+        $this->id = $id;
         $this->titre = $titre;
         $this->description = $description;
+        $this->date = $date;
+        $this->closed = $closed;
+        
     }
 
     function getTitre() {

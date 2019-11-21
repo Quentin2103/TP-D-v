@@ -1,23 +1,73 @@
-<?php
-include '../Models/bugManager.php'
-?>
-
-
-
 <html>
-  <meta name="createAt" content="width=device-width, initial-scale=1">
- <body> 
-<form method="post">
-    <p>Titre : <input type="text" name="titre" /></p>
-<legend>Description :</legend>
-<textarea name="desc" rows="8" cols="45">
-Votre message ici.
-</textarea>
-<p><input type="submit" value="envoyer le formulaire" name="envoie"/></p>
+    <body>
+<style>
+    p {
+  margin-top: 0px;
+}
+ 
+fieldset {
+  margin-bottom: 15px;
+  padding: 10px;
+}
+ 
+legend {
+  padding: 0px 3px;
+  font-weight: bold;
+  font-variant: small-caps;
+}
+ 
+label {
+  width: 110px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 6px;
+}
+ 
+em {
+  font-weight: bold;
+  font-style: normal;
+  color: #f00;
+}
+ 
+input, textarea {
+  width: 249px;
+}
+ 
+textarea {
+  height: 100px;
+}
+</style>
+<h2>Ajouter un Bug</h2>
+<form action="" method="post">
+  <p><i>Complétez le formulaire. Les champs marqué par </i><em>*</em> sont <em>obligatoires</em></p>
+  <fieldset>
+    <legend>ID</legend>
+      <label for="nom">Auto Incrémenté </label>
+  </fieldset>
+  <fieldset>
+    <legend>Titre</legend>
+      <label for="Titre">Titre<em>*</em></label>
+      <input id="Titre" autofocus="" required="" name="Titre"><br>
+  </fieldset>
+  <fieldset>
+    <legend>Description<em>*</em></legend>
+      <textarea id="comments" rows="10" cols="40" name="Description"></textarea>
+  </fieldset>
+  <fieldset>
+    <legend>Date<em>*</em></legend>
+    <input type="date" value="<?php echo date("Y-m-d" ); ?>" name="Date">
+  </fieldset>
+    <fieldset>
+    <legend>Status<em>*</em></legend>
+    <select multiple class="form-control" id="exampleFormControlSelect2" name="Status">
+      <option selected="selected">0 </option>
+      <option>1 </option>
+    </select>
+  </fieldset>
+  <input type="submit" name="action">
+
+
 </form>
-
-     <a href="list.php"><input class="btn btn-primary" type="button" value="Retour"</a>
-     
+<a href="list"><input class="favorite styled "type="button" value="Retour"</a>
 </body>
-
 </html>

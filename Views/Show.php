@@ -1,8 +1,3 @@
-  <?php
-      require_once ('../Controllers/index.php');
-        ?>
-
-
 <html>
 
     <body>
@@ -13,8 +8,8 @@
                 <td>Description</td>
             </tr>
         
-      
-        <h1><?=$bug->getTitre();?></h1>
+        <h1><?php $bug = $parameters["bug"];
+        $bug->getTitre(); ?></h1>
 
         <tbody>
             <tr>
@@ -29,7 +24,7 @@
        
         </table>
 
-            <a href="list.php"><input class="btn btn-primary" type="button" value="Retour"</a>
+            <a href="list"><input class="btn btn-primary" type="button" value="Retour"</a>
     </body>
 
 </html>

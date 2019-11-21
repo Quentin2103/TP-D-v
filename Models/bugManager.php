@@ -1,14 +1,16 @@
 <?php
 
-include_once ('../Models/bug.php');
-include_once ('../Models/Manager.php');
-require_once ('../Controllers/index.php');
+include_once ('bug.php');
+include_once ('Manager.php');
 
 
 class bugmanager extends connectBDD {
 
     private $bugs = [];
-
+    private $dbh;
+    function __construct() {
+        $this->dbh = $this->connectDb();
+    }
  
 
     function findAll() {
@@ -41,19 +43,17 @@ class bugmanager extends connectBDD {
     }
         
         
-    function add(Bug $bug){
+    function add($bug) {
         
-        // var_dump($bug->getTitre());  var_dump($bug->getDescription()); die();
-
-        $dbh = $this->connectDb();  
-
-            $sql = "INSERT INTO `bug`(`titre`, `desc`) VALUES (:titre, :desc)";
-            $sth = $dbh->prepare($sql);
-            $sth->execute([
-                "titre" => $bug->getTitre(),
-                "desc" => $bug->getDescription(),
-            ]);            
-        
+//        $stmt = $dbh->query("INSERT INTO bug (titre,desc,createAt,closed) VALUES (:titre,:desc,:createAt,:closed)");
+        var_dump($bug);
+        $stmt = $this->dbh->prepare("INSERT INTO bug (titre,desc,createAt,closed) VALUES (:titre, :desc, :createAt, :closed)");
+        $stmt->bindValue(':titre', $bug->getTitre());
+        $stmt->bindValue(':desc', $bug->getDescription());
+        $stmt->bindValue(':createAt',$bug->getDate());
+        $stmt->bindValue(':closed', $bug->getClosed());
+        $stmt->execute();
+  
     }
 
 }
