@@ -18,6 +18,7 @@ class bugController{
     }
     
     public function add(){
+        // var_dump($_POST);
         if(isset($_POST["Titre"])){
             $bugManager = new bugManager();
             $bug = new Bug("",$_POST["Titre"],$_POST["Description"],$_POST["Date"],$_POST["Status"]);

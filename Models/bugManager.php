@@ -19,10 +19,7 @@ class bugmanager extends connectBDD {
         $sth = $dbh->query('SELECT * FROM `bug` ORDER BY `id`', PDO::FETCH_ASSOC);
 
         while ($données = $sth->fetch()) {
-            $bug = new Bug($données["titre"], $données["desc"]);
-            $bug->setId($données["id"]);
-            $bug->setDate($données["createAt"]);
-            $bug->setClosed($données["closed"]);            
+            $bug = new Bug($données["id"],$données["titre"], $données["desc"],$données["createAt"],$données["closed"]);            
             $this->bug[]=$bug;            
         }
         return $this->bug;
@@ -35,7 +32,7 @@ class bugmanager extends connectBDD {
         $sth = $dbh->query('SELECT * FROM `bug` WHERE `id`='.$id, PDO::FETCH_ASSOC);
 
         $données = $sth->fetch();
-        $bug = new Bug($données["titre"], $données["desc"]);
+        $bug = new Bug($données["id"],$données["titre"], $données["desc"],$données["createAt"],$données["closed"]);
         $bug->setId($données["id"]);
         $bug->setDate($données['createAt']);
         return $bug;
@@ -46,8 +43,8 @@ class bugmanager extends connectBDD {
     function add($bug) {
         
 //        $stmt = $dbh->query("INSERT INTO bug (titre,desc,createAt,closed) VALUES (:titre,:desc,:createAt,:closed)");
-        var_dump($bug);
-        $stmt = $this->dbh->prepare("INSERT INTO bug (titre,desc,createAt,closed) VALUES (:titre, :desc, :createAt, :closed)");
+        // var_dump($bug);die;
+        $stmt = $this->dbh->prepare("INSERT INTO `bug` (`titre`, `desc`, `createAt`, `closed`) VALUES (:titre, :desc, :createAt, :closed)");
         $stmt->bindValue(':titre', $bug->getTitre());
         $stmt->bindValue(':desc', $bug->getDescription());
         $stmt->bindValue(':createAt',$bug->getDate());

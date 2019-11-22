@@ -4,12 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/dashboard/works/test/Models/bug.php</file>
-            <file>file:/C:/xampp/htdocs/dashboard/works/test/Models/Manager.php</file>
             <file>file:/C:/xampp/htdocs/dashboard/works/test/Controllers/bugController.php</file>
+            <file>file:/C:/xampp/htdocs/dashboard/works/test/Models/Manager.php</file>
             <file>file:/C:/xampp/htdocs/dashboard/works/test/Views/Show.php</file>
-            <file>file:/C:/xampp/htdocs/dashboard/works/test/Controllers/.htaccess</file>
             <file>file:/C:/xampp/htdocs/dashboard/works/test/Views/list.php</file>
             <file>file:/C:/xampp/htdocs/dashboard/works/test/index.php</file>
+            <file>file:/C:/xampp/htdocs/dashboard/works/test/.gitignore</file>
             <file>file:/C:/xampp/htdocs/dashboard/works/test/Models/bugManager.php</file>
             <file>file:/C:/xampp/htdocs/dashboard/works/test/Views/AjoutBug.php</file>
         </group>

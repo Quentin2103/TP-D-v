@@ -45,6 +45,7 @@ class Bug {
         $this->description = $description;
         $this->date = $date;
         $this->closed = $closed;
+        // var_dump($this);die();
         
     }
 
