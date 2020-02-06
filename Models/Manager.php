@@ -8,6 +8,7 @@ class connectBDD {
         
         $dbh = new PDO('mysql:host=localhost;dbname=bug;charset=utf8', 'root', '', $pdo_options);
         return $dbh;
+        
     }
 
 }

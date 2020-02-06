@@ -37,6 +37,7 @@ class bugmanager extends connectBDD {
         $bug->setDate($données['createAt']);
         return $bug;
         
+        
     }
         
         
@@ -53,6 +54,28 @@ class bugmanager extends connectBDD {
   
     }
 
-}
+    function update($bug) {
+        $dbh = $this->connectDb();  
+        $sth = $dbh->prepare("UPDATE `bug` SET `titre`=:titre, `desc`=:desc, `closed`=:closed WHERE `id`=:id");
+        $sth->execute ([
+            ':titre'=>$bug->getTitre(),
+            ':desc'=>$bug->getDescription(),
+            ':closed'=>$bug->getClosed(),
+            ':id'=>$bug->getid()
+        ]);
+    }
 
+    function findByStatut(){
+        $dbh = $this->connectDb();
+        $sth = $dbh->query('SELECT * FROM `bug` WHERE `closed`=0', PDO::FETCH_ASSOC);
+        
+        while ($données = $sth->fetch()) {
+            $bug = new Bug($données["id"],$données["titre"], $données["desc"],$données["createAt"],$données["closed"]);            
+            $this->bug[]=$bug;            
+        }
+        return $this->bug;
+
+    }
+
+}
 ?>

@@ -9,6 +9,7 @@ class Bug {
     
     function getDate() {
         return $this->date;
+        
     }
 
     function getClosed() {

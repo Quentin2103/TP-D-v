@@ -11,12 +11,19 @@
 
   <table class="table">
     <thead>
+    <div>
+         <input type='checkbox' name='case' value='on'> 
+          Filtrer par Bugs non traité 
+
+       </div>   
+
       <tr>
          
-        <th>Nom Bug</th> 
+        <th>Nom Bug</th>
+        <th>ID</th> 
         <th>Description</th>
         <th>Date Création</th>
-        <th>Closed</th>
+        <th>Statut</th>
       </tr>
     </thead>
     <tbody>    
@@ -25,12 +32,23 @@
         foreach ($bugs as $bug) {
             
     ?> 
-        <tr class="table-primary">
-            <td><?=$bug->getTitre();?></td>
+        <tr class="table-primary" id="Bug_<?=$bug->getid();?>">
+            <td><a href="show$<?=$bug->getId()?>"><?=$bug->getTitre();?></a></td>
+
+            <td><?=$bug->getid();?></td>
             <td><?=$bug->getDescription();?></td>
             <td><?=$bug->getDate();?></td>
-             <td><?=$bug->getClosed();?></td>
-            <td><a href="show$<?=$bug->getId()?>"><?=$bug->getTitre();?></a></td>
+            <td id="td_<?=$bug->getid();?>"><?php
+            if ($bug->getClosed()==0){?>
+
+              <a class='trigger' href="update?<?=$bug->getId()?>" >Non traité </a>
+
+              <?php }
+              else{ ?>
+
+              <span>Résolut</span>
+
+              <?php } ?> </td>
         </tr>
      <?php }?>
       
@@ -39,7 +57,9 @@
     </tbody>
   </table>
        <a href="AjoutBug"><input class="btn btn-danger" type="button" value="Ajout Bug"</a>
-</div>
-  
+      
+       </div>          
+      
 </body>
+<script src="Ressources/ajax.js"></script>
 </html>

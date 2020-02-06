@@ -25,17 +25,23 @@ switch(true) {
     case (preg_match('/^show/',$uri[4])):
         
         $id= substr($uri[4],-1);
-        
         return (new bugController())->show($id);
 
         break;
-    
 
-    default :
+
+
+    case (preg_match('/^update/',$uri[4])):
+            
+        $id= explode("?",$uri[4]);
+        return (new bugController())->update($id[1]);
         
+        break;
+            
+        
+    default :
+                
         return (new bugController())->list();
-
+            
                 
 }
-
-

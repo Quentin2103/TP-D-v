@@ -4,10 +4,27 @@ require_once('Models/bugManager.php');
 class bugController{
     
     public function list(){
-        $bugManager = new bugManager();
-        $bugs = $bugManager->findAll();
-        $content = $this->render('Views/list.php', ['bugs' => $bugs]);
-        return $this->sendHttpResponse($content, 200);
+        $headers=apache_request_headers();
+        var_dump($headers);
+        if (isset ($headers['XMLhttpRequest'])) {
+            if (isset ($_GET['filter'])){
+                $bugs = $bugManager->findByStatut();
+            } else{
+                $bugs = $bugManager->findAll();
+            }
+            $response=[
+            'succes'=>true,
+            'bugs'=>$bugs
+        ];    
+            echo json_encode($response);
+        }    
+        else {
+
+            $bugManager = new bugManager();
+            $bugs = $bugManager->findAll();
+            $content = $this->render('Views/list.php', ['bugs' => $bugs]);
+            return $this->sendHttpResponse($content, 200);
+        }
     }
     
     public function show($id){
@@ -44,6 +61,22 @@ class bugController{
         header('Content-Type: text/html');
         echo $content;
     }
-            
+
+    public function update($id) {
+        $bugManager = new bugManager();
+        $bug = $bugManager->find($id);
+        if (isset($_POST['statut'])){
+            $bug->setClosed($_POST['statut']);
+        };     
+        $bugManager->update($bug);
+    
+        http_response_code(200);
+        header ('Content-type:application/json');
+        $response=[
+            'succes'=>true,
+            'id'=>$bug->getId()
+        ];
+        echo json_encode($response);
+    }
 }
 ?>
