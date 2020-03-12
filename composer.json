@@ -1,0 +1,13 @@
+{
+    "name": "eleve/appli_bug",
+    "description": "Quentin",
+    "require": {
+        "guzzlehttp/guzzle": "^6.5"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "BugApp\\":"src/"
+        }
+    }
+}

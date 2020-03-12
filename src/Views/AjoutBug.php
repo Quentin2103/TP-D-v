@@ -64,6 +64,16 @@ textarea {
       <option>1 </option>
     </select>
   </fieldset>
+   <fieldset>
+    <legend>URL</legend>
+      <label for="URL">URL<em>*</em></label>
+      <input id="URL" autofocus="" required="" name="NDD"><br>
+  </fieldset>
+  <fieldset>
+    <legend>Nom de domaine</legend>
+      <label for="NDD">Nom de domaine<em>*</em></label>
+      <input id="NDD" autofocus="" required="" name="NDD"><br>
+  </fieldset>
   <input type="submit" name="action">
 
 

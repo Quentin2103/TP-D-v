@@ -1,11 +1,15 @@
 <?php
-require_once('Models/bugManager.php');
+namespace BugApp\Controllers;
 
-class bugController{
+use BugApp\Models\BugManager;
+use BugApp\Models\Bug;
+
+class BugController{
     
     public function list(){
+        $bugManager = new BugManager();
         $headers=apache_request_headers();
-        var_dump($headers);
+        
         if (isset ($headers['XMLhttpRequest'])) {
             if (isset ($_GET['filter'])){
                 $bugs = $bugManager->findByStatut();
@@ -14,36 +18,39 @@ class bugController{
             }
             $response=[
             'succes'=>true,
-            'bugs'=>$bugs
-        ];    
+            'bugs'=>$bugs 
+        ];
             echo json_encode($response);
+            
         }    
         else {
+            
 
-            $bugManager = new bugManager();
             $bugs = $bugManager->findAll();
-            $content = $this->render('Views/list.php', ['bugs' => $bugs]);
+            $content = $this->render('src/Views/list.php', ['bugs' => $bugs]);
+            
             return $this->sendHttpResponse($content, 200);
         }
     }
     
     public function show($id){
-        $BugManager = new bugManager();
-        $bug = $BugManager->find($id);
-        $content = $this->render('Views/Show.php',['bug' => $bug]);
+        $bugManager = new BugManager();
+        $bug = $bugManager->find($id);
+        $content = $this->render('src/Views/Show.php',['bug' => $bug]);
         return $this->sendHttpResponse($content,200);
     }
     
     public function add(){
         // var_dump($_POST);
         if(isset($_POST["Titre"])){
-            $bugManager = new bugManager();
-            $bug = new Bug("",$_POST["Titre"],$_POST["Description"],$_POST["Date"],$_POST["Status"]);
+            $bugManager = new BugManager();
+            $address_ip = $bugManager->ip_api($_POST["NDD"]);
+            $bug = new Bug(null,$_POST["Titre"],$_POST["Description"],$_POST["Date"],$_POST["Status"],$_POST["URL"],$_POST["NDD"],$address_ip);
             $bugManager->add($bug);
             header('Location: list');
         }
         else{
-           $content = $this->render('Views/AjoutBug.php',[]);
+           $content = $this->render('src/Views/AjoutBug.php',[]);
            return $this->sendHttpResponse($content,200);
         }
     }
@@ -63,7 +70,7 @@ class bugController{
     }
 
     public function update($id) {
-        $bugManager = new bugManager();
+        $bugManager = new BugManager();
         $bug = $bugManager->find($id);
         if (isset($_POST['statut'])){
             $bug->setClosed($_POST['statut']);
@@ -77,6 +84,10 @@ class bugController{
             'id'=>$bug->getId()
         ];
         echo json_encode($response);
+    }
+
+    public function ip_api(){
+
     }
 }
 ?>
